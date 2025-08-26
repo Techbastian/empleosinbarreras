@@ -24,21 +24,15 @@ function updateCarousel() {
   });
 }
 
-function moveSlide(direction) {
-  currentSlide += direction;
-  if (currentSlide >= totalSlides) currentSlide = 0;
-  if (currentSlide < 0) currentSlide = totalSlides - 1;
-  updateCarousel();
-}
-
 function goToSlide(slideIndex) {
   currentSlide = slideIndex;
   updateCarousel();
 }
 
-// Auto-advance carousel
+// Auto-advance infinite carousel
 setInterval(() => {
-  moveSlide(1);
+  currentSlide = (currentSlide + 1) % totalSlides;
+  updateCarousel();
 }, 3000);
 
 // Interactive Map (using Leaflet)
