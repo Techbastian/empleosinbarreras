@@ -25,15 +25,26 @@ function updateCarousel() {
 }
 
 function goToSlide(slideIndex) {
-  currentSlide = slideIndex;
+  currentSlide = (slideIndex + totalSlides) % totalSlides;
   updateCarousel();
+}
+
+// Botones prev/next
+const prevBtn = document.getElementById("carouselPrev");
+const nextBtn = document.getElementById("carouselNext");
+if (prevBtn && nextBtn) {
+  prevBtn.addEventListener("click", () => {
+    goToSlide(currentSlide - 1);
+  });
+  nextBtn.addEventListener("click", () => {
+    goToSlide(currentSlide + 1);
+  });
 }
 
 // Auto-advance infinite carousel
 setInterval(() => {
-  currentSlide = (currentSlide + 1) % totalSlides;
-  updateCarousel();
-}, 3000);
+  goToSlide(currentSlide + 1);
+}, 5000);
 
 // Interactive Map (using Leaflet)
 function initMap() {
